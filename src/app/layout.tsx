@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { I18nProvider } from '@/i18n/I18n';
 
-const SITE_URL = 'https://www.odinblock.com';
+const SITE_URL = 'https://odinblock.com';
 const TITLE = 'ODINBLOCK — 블록체인 게놈 데이터 플랫폼';
 const DESCRIPTION =
   '오딘블록은 블록체인 기반 게놈·건강 데이터 인프라입니다. DID로 개인 정보를 보호하면서 데이터 제공자에게 보상을 분배하고, 연구·의료기관에 신뢰 가능한 데이터 액세스를 제공합니다.';
