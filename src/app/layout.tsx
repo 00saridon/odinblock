@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { I18nProvider } from '@/i18n/I18n';
 
 const SITE_URL = 'https://www.odinblock.com';
 const TITLE = 'ODINBLOCK — 블록체인 게놈 데이터 플랫폼';
@@ -55,7 +56,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <I18nProvider>{children}</I18nProvider>
+      </body>
     </html>
   );
 }

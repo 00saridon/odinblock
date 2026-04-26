@@ -2,16 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-
-const links = [
-  { href: '#problem', label: '문제' },
-  { href: '#solution', label: '솔루션' },
-  { href: '#how', label: '구조' },
-  { href: '#token', label: '토큰' },
-  { href: '#roadmap', label: '로드맵' },
-];
+import LangToggle from './LangToggle';
+import { useT } from '@/i18n/I18n';
 
 export default function Nav() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -22,6 +17,16 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const links = [
+    { href: '#problem', label: t('nav.problem') },
+    { href: '#solution', label: t('nav.solution') },
+    { href: '#how', label: t('nav.how') },
+    { href: '#token', label: t('nav.token') },
+    { href: '#roadmap', label: t('nav.roadmap') },
+    { href: '#team', label: t('nav.team') },
+    { href: '#blog', label: t('nav.blog') },
+  ];
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -30,15 +35,15 @@ export default function Nav() {
           : 'border-b border-transparent'
       }`}
     >
-      <div className="container-page flex h-16 items-center justify-between">
-        <a href="#top" className="flex items-center gap-2 group">
+      <div className="container-page flex h-16 items-center justify-between gap-4">
+        <a href="#top" className="flex items-center gap-2 group shrink-0">
           <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-cyan to-bio shadow-glow">
             <span className="text-midnight-950 font-black text-sm">Ø</span>
           </div>
           <span className="font-bold tracking-wide text-white">ODINBLOCK</span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-7 ml-4">
           {links.map((l) => (
             <a
               key={l.href}
@@ -50,26 +55,30 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3 ml-auto">
+          <LangToggle />
           <a href="/docs/ODIN%20whitepaper.pdf" className="btn-outline">
-            백서
+            {t('nav.whitepaper')}
           </a>
           <a href="#contact" className="btn-primary">
-            문의하기
+            {t('nav.contact')}
           </a>
         </div>
 
-        <button
-          aria-label="메뉴 열기"
-          className="md:hidden grid place-items-center h-9 w-9 rounded-lg border border-white/10 bg-white/5 text-white"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={18} /> : <Menu size={18} />}
-        </button>
+        <div className="lg:hidden flex items-center gap-2 ml-auto">
+          <LangToggle />
+          <button
+            aria-label="menu"
+            className="grid place-items-center h-9 w-9 rounded-lg border border-white/10 bg-white/5 text-white"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-white/5 bg-midnight-900/95 backdrop-blur-lg">
+        <div className="lg:hidden border-t border-white/5 bg-midnight-900/95 backdrop-blur-lg">
           <div className="container-page py-4 flex flex-col gap-3">
             {links.map((l) => (
               <a
@@ -83,10 +92,10 @@ export default function Nav() {
             ))}
             <div className="flex gap-2 pt-2">
               <a href="/docs/ODIN%20whitepaper.pdf" className="btn-outline flex-1">
-                백서
+                {t('nav.whitepaper')}
               </a>
               <a href="#contact" className="btn-primary flex-1">
-                문의하기
+                {t('nav.contact')}
               </a>
             </div>
           </div>

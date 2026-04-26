@@ -1,6 +1,11 @@
+'use client';
+
 import { Github, Send, Twitter } from 'lucide-react';
+import { useT } from '@/i18n/I18n';
 
 export default function Footer() {
+  const t = useT();
+  const year = new Date().getFullYear();
   return (
     <footer id="contact" className="border-t border-white/5 bg-midnight-950/60">
       <div className="container-page py-16 grid gap-10 md:grid-cols-4">
@@ -12,46 +17,68 @@ export default function Footer() {
             <span className="font-bold tracking-wide text-white">ODINBLOCK</span>
           </div>
           <p className="body-muted max-w-md text-sm">
-            블록체인 기반 게놈·건강 데이터 플랫폼.
+            {t('footer.tag')}
             <br />
-            과학·의료의 발전을 위해 데이터 주권과 보상을 다시 디자인합니다.
+            {t('footer.tag2')}
           </p>
           <div className="flex gap-3 pt-2">
-            <a aria-label="Twitter" href="#" className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 hover:bg-white/5">
+            <a
+              aria-label="Twitter"
+              href="#"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 hover:bg-white/5"
+            >
               <Twitter size={16} />
             </a>
-            <a aria-label="Telegram" href="#" className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 hover:bg-white/5">
+            <a
+              aria-label="Telegram"
+              href="#"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 hover:bg-white/5"
+            >
               <Send size={16} />
             </a>
-            <a aria-label="GitHub" href="https://github.com/00saridon/odinblock" className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 hover:bg-white/5">
+            <a
+              aria-label="GitHub"
+              href="https://github.com/00saridon/odinblock"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 hover:bg-white/5"
+            >
               <Github size={16} />
             </a>
           </div>
         </div>
 
         <div className="space-y-3 text-sm">
-          <div className="text-white font-semibold">프로젝트</div>
+          <div className="text-white font-semibold">{t('footer.proj')}</div>
           <ul className="space-y-2 text-slate-400">
-            <li><a href="#problem" className="hover:text-white">문제</a></li>
-            <li><a href="#solution" className="hover:text-white">솔루션</a></li>
-            <li><a href="#token" className="hover:text-white">토큰</a></li>
-            <li><a href="#roadmap" className="hover:text-white">로드맵</a></li>
+            <li><a href="#problem" className="hover:text-white">{t('nav.problem')}</a></li>
+            <li><a href="#solution" className="hover:text-white">{t('nav.solution')}</a></li>
+            <li><a href="#token" className="hover:text-white">{t('nav.token')}</a></li>
+            <li><a href="#roadmap" className="hover:text-white">{t('nav.roadmap')}</a></li>
+            <li><a href="#team" className="hover:text-white">{t('nav.team')}</a></li>
           </ul>
         </div>
 
         <div className="space-y-3 text-sm">
-          <div className="text-white font-semibold">자료</div>
+          <div className="text-white font-semibold">{t('footer.docs')}</div>
           <ul className="space-y-2 text-slate-400">
-            <li><a href="/docs/ODIN%20whitepaper.pdf" className="hover:text-white">백서 (KOR)</a></li>
+            <li>
+              <a href="/docs/ODIN%20whitepaper.pdf" className="hover:text-white">
+                {t('nav.whitepaper')}
+              </a>
+            </li>
+            <li><a href="#blog" className="hover:text-white">{t('nav.blog')}</a></li>
             <li><a href="#faq" className="hover:text-white">FAQ</a></li>
-            <li><a href="mailto:contact@odinblock.com" className="hover:text-white">contact@odinblock.com</a></li>
+            <li>
+              <a href="mailto:contact@odinblock.com" className="hover:text-white">
+                contact@odinblock.com
+              </a>
+            </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-white/5">
         <div className="container-page py-6 text-xs text-slate-500 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
-          <div>© {new Date().getFullYear()} ODINBLOCK. All rights reserved.</div>
-          <div>본 자료는 투자 권유나 자문이 아닙니다.</div>
+          <div>{t('footer.copy').replace('{year}', String(year))}</div>
+          <div>{t('footer.disclaimer')}</div>
         </div>
       </div>
     </footer>
