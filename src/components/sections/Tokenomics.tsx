@@ -1,5 +1,6 @@
 'use client';
 
+import TokenInfo from '@/components/TokenInfo';
 import { useT } from '@/i18n/I18n';
 
 type AllocKey = 'reward' | 'buyer' | 'reserve' | 'team' | 'eco' | 'mkt';
@@ -30,6 +31,10 @@ export default function Tokenomics() {
           <div className="eyebrow">{t('token.eyebrow')}</div>
           <h2 className="heading-lg mt-4">{t('token.title')}</h2>
           <p className="body-muted mt-5 text-base sm:text-lg">{t('token.lead')}</p>
+        </div>
+
+        <div className="mt-12">
+          <TokenInfo />
         </div>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-5 items-center">

@@ -1,5 +1,5 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { mainnet, polygon, base, arbitrum, sepolia } from 'wagmi/chains';
+import { bsc, mainnet, polygon, base, arbitrum, sepolia } from 'wagmi/chains';
 
 // Falls back to a placeholder so the build doesn't crash when the secret
 // is unset. WalletConnect protocol won't actually work with the placeholder,
@@ -14,6 +14,6 @@ export const wagmiConfig = getDefaultConfig({
   appUrl: 'https://odinblock.com',
   appIcon: 'https://odinblock.com/favicon.ico',
   projectId,
-  chains: [mainnet, polygon, base, arbitrum, sepolia],
+  chains: [bsc, mainnet, polygon, base, arbitrum, sepolia],
   ssr: false,
 });
