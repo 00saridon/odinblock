@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAccount, useBalance, useSwitchChain } from 'wagmi';
+import { useAccount, useBalance, useSwitchChain, useWalletClient } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Copy,
@@ -18,6 +18,7 @@ export default function TokenInfo() {
   const t = useT();
   const { address, isConnected, chainId } = useAccount();
   const { switchChain, isPending: isSwitching } = useSwitchChain();
+  const { data: walletClient } = useWalletClient();
   const [copied, setCopied] = useState(false);
   const [adding, setAdding] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -41,26 +42,22 @@ export default function TokenInfo() {
   };
 
   const addToWallet = async () => {
-    type EthProvider = {
-      request: (args: { method: string; params: unknown }) => Promise<unknown>;
-    };
-    const eth = (window as unknown as { ethereum?: EthProvider }).ethereum;
-    if (!eth) return;
+    if (!walletClient) return;
     setAdding(true);
     try {
-      await eth.request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20',
-          options: {
-            address: ODIN_TOKEN.address,
-            symbol: ODIN_TOKEN.symbol,
-            decimals: ODIN_TOKEN.decimals,
-          },
+      await walletClient.watchAsset({
+        type: 'ERC20',
+        options: {
+          address: ODIN_TOKEN.address,
+          symbol: ODIN_TOKEN.symbol,
+          decimals: ODIN_TOKEN.decimals,
         },
       });
-    } catch {}
-    setAdding(false);
+    } catch (e) {
+      console.warn('watchAsset failed:', e);
+    } finally {
+      setAdding(false);
+    }
   };
 
   return (
