@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { I18nProvider } from '@/i18n/I18n';
+import Web3Providers from '@/components/Web3Providers';
 
 const SITE_URL = 'https://odinblock.com';
 const TITLE = 'ODINBLOCK — 블록체인 게놈 데이터 플랫폼';
@@ -57,7 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <I18nProvider>{children}</I18nProvider>
+        <Web3Providers>
+          <I18nProvider>{children}</I18nProvider>
+        </Web3Providers>
       </body>
     </html>
   );

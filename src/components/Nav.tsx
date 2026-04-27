@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import LangToggle from './LangToggle';
+import WalletButton from './WalletButton';
 import { useT } from '@/i18n/I18n';
 
 export default function Nav() {
@@ -60,9 +61,7 @@ export default function Nav() {
           <a href="/docs/ODIN%20whitepaper.pdf" className="btn-outline">
             {t('nav.whitepaper')}
           </a>
-          <a href="#contact" className="btn-primary">
-            {t('nav.contact')}
-          </a>
+          <WalletButton />
         </div>
 
         <div className="lg:hidden flex items-center gap-2 ml-auto">
@@ -90,13 +89,11 @@ export default function Nav() {
                 {l.label}
               </a>
             ))}
-            <div className="flex gap-2 pt-2">
-              <a href="/docs/ODIN%20whitepaper.pdf" className="btn-outline flex-1">
+            <div className="flex flex-col gap-2 pt-2">
+              <a href="/docs/ODIN%20whitepaper.pdf" className="btn-outline">
                 {t('nav.whitepaper')}
               </a>
-              <a href="#contact" className="btn-primary flex-1">
-                {t('nav.contact')}
-              </a>
+              <WalletButton full />
             </div>
           </div>
         </div>
