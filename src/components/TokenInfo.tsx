@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount, useBalance, useSwitchChain } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
@@ -20,6 +20,8 @@ export default function TokenInfo() {
   const { switchChain, isPending: isSwitching } = useSwitchChain();
   const [copied, setCopied] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const isOnBsc = chainId === ODIN_TOKEN.chain.id;
 
@@ -124,7 +126,14 @@ export default function TokenInfo() {
             <WalletIcon size={12} /> Your Wallet
           </div>
 
-          {!isConnected && (
+          {!mounted && (
+            <div className="mt-4 flex-1 flex flex-col gap-4 justify-center items-start animate-pulse">
+              <div className="h-3 w-40 rounded bg-white/5" />
+              <div className="h-9 w-36 rounded-full bg-white/5" />
+            </div>
+          )}
+
+          {mounted && !isConnected && (
             <div className="mt-4 flex-1 flex flex-col gap-4 justify-center items-start">
               <p className="text-sm text-slate-300">
                 {t('token.connect_lead') ||
@@ -142,7 +151,7 @@ export default function TokenInfo() {
             </div>
           )}
 
-          {isConnected && !isOnBsc && (
+          {mounted && isConnected && !isOnBsc && (
             <div className="mt-4 flex-1 flex flex-col gap-4 justify-center items-start">
               <p className="text-sm text-amber-200/90 inline-flex items-center gap-2">
                 <AlertTriangle size={14} /> Switch network to view your ODIN balance.
@@ -157,7 +166,7 @@ export default function TokenInfo() {
             </div>
           )}
 
-          {isConnected && isOnBsc && (
+          {mounted && isConnected && isOnBsc && (
             <div className="mt-4 flex-1 flex flex-col gap-4">
               <div>
                 <div className="text-xs text-slate-500">{shortenAddress(address!)}</div>
